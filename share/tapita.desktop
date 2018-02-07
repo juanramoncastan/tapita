@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Tapita
+GenericName=Tapita
+Exec=tapita
+Categories=Audio;
+Icon=tapita
+NoDisplay=false
+StartupNotify=true
+Terminal=false
+Type=Application
