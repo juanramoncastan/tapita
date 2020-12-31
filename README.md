@@ -35,7 +35,7 @@ tapita [options]
 
 BUILDING DEPENDENCIES
 ------------------------------------------------------------------------
-You may need to install the next headers (developer) packages
+You may need to install the next (developer) packages
 
 libgtk-2.0 (developer)
 libasound (developer)
