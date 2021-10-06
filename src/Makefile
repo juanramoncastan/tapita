@@ -19,7 +19,7 @@
 # Makefile
 # objectives:
 #    tapita, tapita.o, utils.o, checkglib, clean, install, uninstall
-# N
+# 
 
 
 PREFIX = /usr
