@@ -25,7 +25,7 @@
 PREFIX = /usr
 GCC = gcc
 OPT = -g -Wall
-CFLAGS = -lm -ljack -lasound `pkg-config --libs --cflags gtk+-2.0`
+CFLAGS = -lm -ljack -lasound `pkg-config --libs --cflags gtk+-2.0 gdk-2.0`
 OBJS = utils.o tapita.o
 
 tapita: buildconf checkglib $(OBJS)

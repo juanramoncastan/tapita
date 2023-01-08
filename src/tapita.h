@@ -26,6 +26,8 @@
  *
  ***************************************************************************/
 
+#define GTK_DISABLE_DEPRECATED
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -37,6 +39,7 @@
 #include <sys/time.h>
 #include <jack/jack.h>
 #include "utils.h"
+
 
 
 // Function Declaration

@@ -26,25 +26,25 @@ tapita [options]
     "Delete"    reset.
     "PageUp"    raise jack input threshold.
     "PageDown"  drop jack input threshold.
-    "A"         Toggle Autoreset.
-    "J"         Set JACK as input.
-    "K"         Set "Space Bar" as input.
-    "M"         Set MIDI as input.
-    "Ctrl+Q"    Quit application.
+    "Ctrl+a"         Toggle Autoreset.
+    "Ctrl+j"         Set JACK as input.
+    "Ctrl+k"         Set "Space Bar" as input.
+    "Ctrl+m"         Set MIDI as input.
+    "Ctrl+q"    Quit application.
 
 
 BUILDING DEPENDENCIES
 ------------------------------------------------------------------------
 You may need to install the next (developer) packages
 
-libgtk-2.0 (developer)
+libgtk2.0 (developer)
 libasound (developer)
 libjack (developer)
 
 
 COMPILATION
 ------------------------------------------------------------------------
-go source directory
+go to source directory
 
 $ cd ./src
 

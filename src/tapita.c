@@ -37,6 +37,7 @@
 #include "tapita.h"
 #include "gthreadsupport.h"
 #include "buildconf.h"
+//#include <gtk/gtkmain.h>
 
 GtkWidget *mainWindow;
 GtkWidget *eventMain;
@@ -378,6 +379,7 @@ int main(int argc, char *argv[]) // Function main()
     g_timeout_add(60, update_widgets, NULL); //  Loop function thread every X ms.
 
     // Loop GTK Main
+    jack_init();
     if (startGTK==true) gtk_main();
     return 0;
 }
@@ -475,30 +477,29 @@ gboolean event_kbd (GtkWidget *widget, GdkEventKey *event, gpointer data)
             gtk_range_set_value (GTK_RANGE(sliderThreshold), sliderThresValue-1);
             break;
         case GDK_a: // 0x061
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkAutoreset),
-                        !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkAutoreset)));
+            if (event->state & GDK_CONTROL_MASK)
+            {
+                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkAutoreset),
+                    !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkAutoreset)));
+            }
             break;
         case GDK_j: // 0x06a
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radioJack),TRUE);
+            if (event->state & GDK_CONTROL_MASK)
+            {
+                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radioJack),TRUE);
+            }
             break;
         case GDK_k: // 0x06b
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radioKbd),TRUE);
+            if (event->state & GDK_CONTROL_MASK)
+            {
+                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radioKbd),TRUE);
+            }
             break;
         case GDK_m: // 0x06d
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radioMidi),TRUE);
-            break;
-        case GDK_A: // 0x041
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkAutoreset),
-                        !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkAutoreset)));
-            break;
-        case GDK_J: // 0x04a
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radioJack),TRUE);
-            break;
-        case GDK_K: // 0x04b
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radioKbd),TRUE);
-            break;
-        case GDK_M: // 0x04d
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radioMidi),TRUE);
+            if (event->state & GDK_CONTROL_MASK)
+            {
+                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radioMidi),TRUE);
+            }
             break;
         case GDK_q: // 0x071
             if (event->state & GDK_CONTROL_MASK)
@@ -506,7 +507,6 @@ gboolean event_kbd (GtkWidget *widget, GdkEventKey *event, gpointer data)
                 quit();
             }
             break;
-
         default:
             return FALSE;
 
@@ -1085,8 +1085,10 @@ void jack_shutdown (void *arg)
 {
 	if (client != NULL )
 	{
-		jack_port_unregister (client, inputPort);
-		jack_deactivate (client);
+	    printf("Closing Jack...\n");
+		//jack_port_unregister (client, inputPort);
+		//free( inputPort );
+		//jack_deactivate (client);
 		jack_client_close (client);
 	}
 }
@@ -1133,9 +1135,10 @@ void help_message() {
 
 // Quitting application
 void quit(){
-    printf("Quitting tapita...\n");
     jack_shutdown(NULL);
+    printf("Exiting...\n");
     gtk_main_quit();
+
 }
 
 
