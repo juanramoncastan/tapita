@@ -1,6 +1,6 @@
 # tapita
 ----------------------------------------------------------------------
-Tapita version 0.3.2
+Tapita version 4.0
 ----------------------------------------------------------------------
 Tapita (snack in spanish) is a BPM detector
 Tapita uses alphanumeric keyboard, MIDI or audio via jack as inputs

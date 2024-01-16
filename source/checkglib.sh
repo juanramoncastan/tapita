@@ -5,8 +5,8 @@
 
 OUTFILE="gthreadsupport.h"
 
-GLIB_MAJOR_VERSION=$(pkg-config --modversion glib-2.0 | sed -e "s/\([0-9]\)\(\.[0-9]\{,2\}\)\(\..*\)/\1/" )
-GLIB_MINOR_VERSION=$(pkg-config --modversion glib-2.0 | sed -e "s/\(${GLIB_MAJOR_VERSION}\.\)\([0-9]\{,2\}\)\(\..*\)/\2/" )
+GLIB_MAJOR_VERSION=$(pkg-config --modversion glib-3.0 | sed -e "s/\([0-9]\)\(\.[0-9]\{,2\}\)\(\..*\)/\1/" )
+GLIB_MINOR_VERSION=$(pkg-config --modversion glib-3.0 | sed -e "s/\(${GLIB_MAJOR_VERSION}\.\)\([0-9]\{,2\}\)\(\..*\)/\2/" )
 echo "// Checked glib version"  > ${OUTFILE}
 echo -n "// " >> ${OUTFILE}
 echo "Glib version ${GLIB_MAJOR_VERSION}.${GLIB_MINOR_VERSION}" | tee -a ${OUTFILE}
