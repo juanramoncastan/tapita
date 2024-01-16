@@ -13,7 +13,9 @@
 #  GNU General Public License for more details.
 #
 # ----------------------------------------------------------------------
-#
+
+# ###########      tapita Makefile (toplevel)     ###########################
+
 
 # BUILD = "../package_name-version" given from "deb_package_creator" app
 
@@ -43,4 +45,11 @@ install: build
 	cp .$(SHARE_PATH)/applications/* $(BUILD)$(PREFIX)$(SHARE_PATH)/applications
 	cp .$(SHARE_PATH)/icons/* $(BUILD)$(PREFIX)$(SHARE_PATH)/icons
 
-	
+uninstall:
+	rm $(BUILD)$(PREFIX)$(BIN_PATH)/tapita
+	rm $(BUILD)$(PREFIX)$(SHARE_PATH)/applications/tapita*
+	rm $(BUILD)$(PREFIX)$(SHARE_PATH)/icons/tapita*
+
+
+
+

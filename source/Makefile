@@ -13,13 +13,8 @@
 #  GNU General Public License for more details.
 #
 # ----------------------------------------------------------------------
-#
-# Tapita version 0.3.1 alpha 8
-#
-# Makefile
-# objectives:
-#    tapita, tapita.o, utils.o, checkglib, clean, install, uninstall
-# 
+
+# ###########      tapita Makefile (builder)    ###########################
 
 
 PREFIX = /usr
@@ -42,7 +37,6 @@ tapita.o: tapita.c
 	@ echo "Compiling tapita.c"
 	$(GCC) $(OPT) -c $<  $(CFLAGS) -o $@
 
-
 directories:
 	@ echo "Creating directories"
 	@ mkdir -p ../bin
@@ -50,7 +44,6 @@ directories:
 clean:
 	rm *.o
 	rm tapita
-
 
 install: tapita
 	cp tapita $(PREFIX)/bin/
@@ -63,3 +56,7 @@ uninstall:
 	rm  $(PREFIX)/share/applications/tapita.desktop
 	rm  $(PREFIX)/share/icons/tapita.svg
 	rm -fr $(PREFIX)/share/tapita
+
+
+
+
