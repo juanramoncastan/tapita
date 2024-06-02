@@ -17,8 +17,7 @@
 # ###########      tapita Makefile (toplevel)     ###########################
 
 
-# BUILD = "../package_name-version" given from "deb_package_creator" app
-
+# BUILD = "../package-name_version_architecture" given from "deb_package_creator" app
 PREFIX = /usr
 SRC_PATH = /source
 BIN_PATH = /bin

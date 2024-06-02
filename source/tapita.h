@@ -18,13 +18,14 @@
 //
 //----------------------------------------------------------------------
 
-/***************************************************************************
- *
- * Tapita version 0.3.1 alpha 8
- *
- * tapita.h
- *
- ***************************************************************************/
+/***********************************************************************
+ 
+ Tapita
+ Version: 4.0-4
+ 
+ tapita.h
+ 
+ ***********************************************************************/
 
 #define GTK_DISABLE_DEPRECATED
 
@@ -43,13 +44,13 @@
 struct timeval timeOfDay;
 
 
+
 // Function Declaration
-
-
 gboolean event_kbd (GtkWidget *widget, GdkEventKey *event, gpointer data);
 void reset();
 unsigned long get_time ();
-unsigned int get_bpm(unsigned int millis);
+float get_bpm(unsigned int millis);
 void update(char *bpm, char *millis);
+void help_message();
 void quit();
 
