@@ -42,25 +42,21 @@
 //#include "buildconf.h"
 //#include <gtk/gtk.h>
 
-
-
+// GTK objects declaration
 GtkWidget *mainWindow;
 GtkWidget *boxMain;
-
 GtkWidget *labelTapCount;
 GtkWidget *labelTapMillis;
 
-unsigned long initTime;
-
-
-int tapCounter;
-
+// Global variables declaration in tapita.h
+// Functions declaration in tapita.h
 
 void reset()
 {
     tapCounter = 0;
 }
 
+// Gets time and returns  
 unsigned long get_time()
 {
     unsigned long lastTime = 0;

@@ -42,7 +42,8 @@
 
 // Vars Declaration
 struct timeval timeOfDay;
-
+int tapCounter;
+unsigned long initTime;
 
 
 // Function Declaration
