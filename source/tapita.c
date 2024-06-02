@@ -19,9 +19,13 @@
 //----------------------------------------------------------------------
 
 /***********************************************************************
- *
- * Tapita version 0.3.1 alpha 8
- *
+ 
+ Tapita
+ Version: 4.0-4
+ 
+ tapita.c
+ 
+ ***********************************************************************
  *   To build the file object "utils.o"
  *      gcc -g -Wall -c utils.c -o utils.o
  *
@@ -78,12 +82,12 @@ unsigned long get_time()
 
 
 
-unsigned int get_bpm(unsigned int milliseconds)
+float get_bpm(unsigned int milliseconds)
 {
-    unsigned int out;
+    float out;
     if( milliseconds > 0 )
     {
-        out = 60000/milliseconds;
+        out = (float)60000/milliseconds;
     }
     else
     {
@@ -96,7 +100,7 @@ gboolean event_kbd (GtkWidget *widget, GdkEventKey *event, gpointer data)
 {
     unsigned int milliseconds;
     unsigned long ms;
-    unsigned int bpm;
+    float bpm;
     char *millis;
     char *bpmstr;
     millis="";
@@ -111,7 +115,7 @@ gboolean event_kbd (GtkWidget *widget, GdkEventKey *event, gpointer data)
             {
                 ms = (int) 60000/bpm;
             }
-            bpmstr = double_to_char( bpm, 0 );
+            bpmstr = double_to_char( bpm, 1 );
             millis = double_to_char( ms, 0 );
             update(bpmstr, millis);
             tapCounter++;
@@ -151,6 +155,24 @@ void update(char *bpm, char *millis)
 
 int main(int argc, char *argv[]) // Function main()
 {
+
+
+    // Arguments input
+    int arguments;
+    while ((arguments = getopt (argc, argv, "h")) != -1)
+    {
+        switch (arguments)
+        {
+            case 'h':
+                help_message();
+                exit(0);
+                break;
+            case '?':
+                help_message();
+                exit(0);
+                break;
+        }
+    }
     
     // Main window
     gtk_init(&argc, &argv);
@@ -160,21 +182,43 @@ int main(int argc, char *argv[]) // Function main()
     
     boxMain = gtk_box_new (GTK_ORIENTATION_VERTICAL , 5);
     gtk_container_add (GTK_CONTAINER (mainWindow), boxMain);
-    labelTapCount = gtk_label_new ("");
-    labelTapMillis = gtk_label_new ("");
+    labelTapCount = gtk_label_new ("BPM");
+    labelTapMillis = gtk_label_new ("ms.");
+
     
     gtk_box_pack_start (GTK_BOX (boxMain), labelTapCount, FALSE, FALSE, 20 );
     gtk_box_pack_start(GTK_BOX (boxMain), labelTapMillis, FALSE, FALSE, 20);
     //gtk_widget_set_halign(labelTapMillis, GTK_ALIGN_CENTER);
-    
-    
-    
+
     gtk_widget_show_all(mainWindow);
     
     g_signal_connect(mainWindow, "destroy", G_CALLBACK(gtk_main_quit), NULL); // Handle Main Window Destroy 
     g_signal_connect (mainWindow, "key_press_event", G_CALLBACK (event_kbd), NULL);  // Handle KBD
     gtk_main();
     return 0;
+}
+
+// Help output
+void help_message() {
+    printf("\n"  );
+    // printf("tapita %s,", version  );
+    printf(" (c) juan ramon castan\n"  );
+    printf("\n"  );
+    printf("Tapita (snack in spanish) is a BPM detector\n"  );
+    printf("with alphanumeric keyboard");
+    printf("\n"  );
+    printf("usage: tapita [options]\n"  );
+    printf("\n"  );
+    printf("  options:\n"  );
+    printf("\n"  );
+	printf("    -h  Show this message.\n"  );
+    printf("    -k  Set \"Space Bar\" as input. (default)\n"  );
+	printf("    -a[TIME]  Enable Autoreset after TIME seconds. TIME is optional.\n"  );
+    printf("\n"  );
+    printf("  \"Space\"\tto tap.\n"  );
+    printf("  \"Delete\"\treset.\n"  );
+    printf("  \"Ctrl+Q\"\tquit application.\n"  );
+    printf("\n"  );
 }
 
 // Quitting application
