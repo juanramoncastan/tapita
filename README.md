@@ -1,6 +1,7 @@
 # tapita
 ----------------------------------------------------------------------
-Tapita version 4.0
+Tapita
+Version: 4.0-4
 ----------------------------------------------------------------------
 Tapita (snack in spanish) is a BPM detector
 Tapita uses alphanumeric keyboard, MIDI or audio via jack as inputs
@@ -14,22 +15,12 @@ tapita [options]
   
     -h          Show this message.
     -k          Set "Space Bar" as input. (default)
-    -j          Set "jack" as input.
-    -m          Set MIDI as input.
-    -p          Last beat is weighted in the avarage time.
-    -a[TIME]    Enable Autoreset after TIME seconds. TIME is optional.
 
   BPM and Autoreset Time labels are editable.
   Jack client will be active when selected as input.
 
     "Space"     to tap.
     "Delete"    reset.
-    "PageUp"    raise jack input threshold.
-    "PageDown"  drop jack input threshold.
-    "Ctrl+a"         Toggle Autoreset.
-    "Ctrl+j"         Set JACK as input.
-    "Ctrl+k"         Set "Space Bar" as input.
-    "Ctrl+m"         Set MIDI as input.
     "Ctrl+q"    Quit application.
 
 
