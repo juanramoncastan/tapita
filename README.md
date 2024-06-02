@@ -16,9 +16,8 @@ tapita [options]
     -h          Show this message.
     -k          Set "Space Bar" as input. (default)
 
-  BPM and Autoreset Time labels are editable.
-  Jack client will be active when selected as input.
 
+Keybindings
     "Space"     to tap.
     "Delete"    reset.
     "Ctrl+q"    Quit application.
