@@ -14,48 +14,53 @@
 #
 # ----------------------------------------------------------------------
 
-# ###########      tapita Makefile (builder)    ###########################
+# ###########      tapita Makefile (toplevel)     ###########################
+# This make file is used only for creating deb package
 
 
+#####  BUILD = "../package-name_version_architecture" given from "deb_package_creator" app
 PREFIX = /usr
+SRC_PATH = /src
 BIN_PATH = /bin
-GCC = gcc
-OPT = -g -Wall
-CFLAGS = -lm -ljack -lasound `pkg-config --libs --cflags gtk+-3.0 gdk-3.0`
-OBJS = utils.o tapita.o
+SHARE_PATH = /share
 
-tapita: directories $(OBJS)
-	@ echo "Linking objects...$(OBJS) to executable $@"
-	$(GCC) $(OPT) $(OBJS) $(CFLAGS) -o $@
-	cp $@ ..$(BIN_PATH)
 
-utils.o: utils.c
-	@ echo "Compiling utils.c"
-	$(GCC) $(OPT) -c $< -o $@
 
-tapita.o: tapita.c
-	@ echo "Compiling tapita.c"
-	$(GCC) $(OPT) -c $<  $(CFLAGS) -o $@
+	
+nothing:
+	@ echo "Test"
 
-directories:
+build:
+	@ echo "Building"
+	@ echo "in root directory: $(BUILD)"
+	# It calls Makefile to compile the binary and 
+	cd .$(SRC_PATH) && $(MAKE)
+
+preparebin:
 	@ echo "Creating directories"
-	@ mkdir -p ../bin
+	mkdir -p .$(BIN_PATH)
+	cp .$(SRC_PATH)/tapita .$(BIN_PATH)
 
 clean:
-	rm *.o
-	rm tapita
+	@ echo "Cleaning"
+	rm .$(BIN_PATH)/tapita
+	cd .$(SRC_PATH) && $(MAKE) clean
+	
 
-install: tapita
-	cp tapita $(PREFIX)/bin/
-	cp ../share/tapita.desktop $(PREFIX)/share/applications/
-	cp ../share/tapita.svg $(PREFIX)/share/icons/
-	cp -R ../share/tapita $(PREFIX)/share/
+install: build preparebin
+ifneq ($(PREFIX),)
+	mkdir -p $(BUILD)$(PREFIX)$(BIN_PATH)
+	mkdir -p $(BUILD)$(PREFIX)$(SHARE_PATH)/applications
+	mkdir -p $(BUILD)$(PREFIX)$(SHARE_PATH)/icons
+	cp .$(BIN_PATH)/tapita $(BUILD)$(PREFIX)$(BIN_PATH)
+	cp .$(SHARE_PATH)/applications/* $(BUILD)$(PREFIX)$(SHARE_PATH)/applications
+	cp .$(SHARE_PATH)/icons/* $(BUILD)$(PREFIX)$(SHARE_PATH)/icons
+endif
 
 uninstall:
-	rm  $(PREFIX)/bin/tapita
-	rm  $(PREFIX)/share/applications/tapita.desktop
-	rm  $(PREFIX)/share/icons/tapita.svg
-	rm -fr $(PREFIX)/share/tapita
+	rm $(BUILD)$(PREFIX)$(BIN_PATH)/tapita
+	rm $(BUILD)$(PREFIX)$(SHARE_PATH)/applications/tapita*
+	rm $(BUILD)$(PREFIX)$(SHARE_PATH)/icons/tapita*
 
 
 

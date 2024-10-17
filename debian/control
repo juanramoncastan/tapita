@@ -1,0 +1,10 @@
+Package: tapita
+Version: 4.0-4
+Section: sound
+Priority: optional
+Architecture: amd64
+Depends: libgtk2.0-0, libasound2, libjack-jackd2-0|ibjack-0.116
+Maintainer: Juan Ramon Castan <monon@quadraphonic>
+Description: Tapita (snack in spanish) is a BPM detector.
+ Tapita uses alphanumeric keyboard, MIDI or audio
+ via jack as inputs to detect pulses.

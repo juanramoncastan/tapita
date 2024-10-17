@@ -34,6 +34,7 @@
 #include <string.h>
 #include <malloc.h>
 #include <math.h>
+// gtk+-3.0 gdk-3.0
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 #include <sys/time.h>
