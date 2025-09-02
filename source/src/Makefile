@@ -18,7 +18,6 @@
 
 BIN_NAME = tapita
 PREFIX = /usr
-PREFIX = 
 BIN_PATH = /bin
 GCC = gcc
 OPT = -g -Wall
