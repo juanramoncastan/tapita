@@ -15,6 +15,7 @@
 # ----------------------------------------------------------------------
 
 # ###########      tapita Makefile (builder)    ###########################
+# Version: 4.0-5
 
 BIN_NAME = tapita
 PREFIX = /usr
@@ -24,27 +25,27 @@ OPT = -g -Wall
 CFLAGS = -lm -ljack -lasound `pkg-config --libs --cflags gtk+-3.0 gdk-3.0`
 OBJS = utils.o tapita.o
 
+
 tapita: $(OBJS)
 	@ echo "Linking objects...$(OBJS) to executable $@"
 	$(GCC) $(OPT) $(OBJS) $(CFLAGS) -o $@
 	#mv $@ ..$(BIN_PATH)
 
+
 utils.o: utils.c
 	@ echo "Compiling utils.c"
 	$(GCC) $(OPT) -c $< -o $@
+
 
 tapita.o: tapita.c
 	@ echo "Compiling tapita.c"
 	$(GCC) $(OPT) -c $<  $(CFLAGS) -o $@
 
+
 clean:
 	rm *.o
 	rm $(BIN_NAME)
 
-prova:
-ifeq ($(PREFIX),)
-	@ echo "siiiii"
-endif
 
 #install:  tapita
 #	cp $(BIN_NAME) $(PREFIX)/bin/

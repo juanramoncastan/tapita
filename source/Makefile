@@ -15,20 +15,18 @@
 # ----------------------------------------------------------------------
 
 # ###########      tapita Makefile (toplevel)     ###########################
-# This make file is used only for creating deb package
+# Version: 4.0-5
 
-
-#####  BUILD = "../package-name_version_architecture" given from "deb_package_creator" app
+#####  BUILD = "../package-name_version_architecture" given from "debianizador" script
 PREFIX = /usr
 SRC_PATH = /src
 BIN_PATH = /bin
 SHARE_PATH = /share
 
 
+test:
+	@ echo User: $(USER)
 
-	
-nothing:
-	@ echo "Test"
 
 build:
 	@ echo "Building"
@@ -36,10 +34,12 @@ build:
 	# It calls Makefile to compile the binary and 
 	cd .$(SRC_PATH) && $(MAKE)
 
+
 preparebin:
 	@ echo "Creating directories"
 	mkdir -p .$(BIN_PATH)
 	cp .$(SRC_PATH)/tapita .$(BIN_PATH)
+
 
 clean:
 	@ echo "Cleaning"
@@ -47,7 +47,7 @@ clean:
 	cd .$(SRC_PATH) && $(MAKE) clean
 	
 
-install: build preparebin
+install: test build preparebin
 ifneq ($(PREFIX),)
 	mkdir -p $(BUILD)$(PREFIX)$(BIN_PATH)
 	mkdir -p $(BUILD)$(PREFIX)$(SHARE_PATH)/applications
@@ -56,6 +56,7 @@ ifneq ($(PREFIX),)
 	cp .$(SHARE_PATH)/applications/* $(BUILD)$(PREFIX)$(SHARE_PATH)/applications
 	cp .$(SHARE_PATH)/icons/* $(BUILD)$(PREFIX)$(SHARE_PATH)/icons
 endif
+
 
 uninstall:
 	rm $(BUILD)$(PREFIX)$(BIN_PATH)/tapita
