@@ -16,8 +16,9 @@
 
 # ###########      tapita Makefile (toplevel)     ###########################
 # Version: 4.0-5
+# BUILD = "../package-name_version_architecture" given from "debianizador" app
 
-#####  BUILD = "../package-name_version_architecture" given from "debianizador" script
+BUILD = 
 PREFIX = /usr
 SRC_PATH = /src
 BIN_PATH = /bin
