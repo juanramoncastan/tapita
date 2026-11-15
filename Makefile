@@ -19,6 +19,7 @@
 # BUILD = "../package-name_version_architecture" given from "debianizador" app
 
 BUILD = 
+SOURCE = .
 PREFIX = /usr
 SRC_PATH = /src
 BIN_PATH = /bin
@@ -33,19 +34,19 @@ build:
 	@ echo "Building"
 	@ echo "in root directory: $(BUILD)"
 	# It calls Makefile to compile the binary and 
-	cd .$(SRC_PATH) && $(MAKE)
+	cd ${SOURCE}$(SRC_PATH) && $(MAKE)
 
 
 preparebin:
 	@ echo "Creating directories"
-	mkdir -p .$(BIN_PATH)
-	cp .$(SRC_PATH)/tapita .$(BIN_PATH)
+	mkdir -p ${SOURCE}$(BIN_PATH)
+	cp ${SOURCE}$(SRC_PATH)/tapita ${SOURCE}$(BIN_PATH)
 
 
 clean:
 	@ echo "Cleaning"
-	rm .$(BIN_PATH)/tapita
-	cd .$(SRC_PATH) && $(MAKE) clean
+	rm ${SOURCE}$(BIN_PATH)/tapita
+	cd ${SOURCE}$(SRC_PATH) && $(MAKE) clean
 	
 
 install: test build preparebin
@@ -53,9 +54,9 @@ ifneq ($(PREFIX),)
 	mkdir -p $(BUILD)$(PREFIX)$(BIN_PATH)
 	mkdir -p $(BUILD)$(PREFIX)$(SHARE_PATH)/applications
 	mkdir -p $(BUILD)$(PREFIX)$(SHARE_PATH)/icons
-	cp .$(BIN_PATH)/tapita $(BUILD)$(PREFIX)$(BIN_PATH)
-	cp .$(SHARE_PATH)/applications/* $(BUILD)$(PREFIX)$(SHARE_PATH)/applications
-	cp .$(SHARE_PATH)/icons/* $(BUILD)$(PREFIX)$(SHARE_PATH)/icons
+	cp ${SOURCE}$(BIN_PATH)/tapita $(BUILD)$(PREFIX)$(BIN_PATH)
+	cp ${SOURCE}$(SHARE_PATH)/applications/* $(BUILD)$(PREFIX)$(SHARE_PATH)/applications
+	cp ${SOURCE}$(SHARE_PATH)/icons/* $(BUILD)$(PREFIX)$(SHARE_PATH)/icons
 endif
 
 
